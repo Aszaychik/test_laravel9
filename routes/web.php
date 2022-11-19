@@ -16,3 +16,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/asz', function () {
+    return "AsZaychik";
+});
+
+Route::redirect('/github', '/asz');
+
+Route::fallback(function(){
+    return '404';
+});
