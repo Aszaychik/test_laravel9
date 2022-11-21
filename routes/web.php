@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use PhpParser\Node\Stmt\Return_;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,3 +41,34 @@ Route::get('/hello-world', function ()
 {
     return view('hello.world', ['name' => 'AsZaychik']);
 });
+
+Route::get('/products/{id}', function ($productId)
+{
+    return "Product $productId";
+});
+
+Route::get('/products/{id}/items/{item}', function ($productId, $itemId)
+{
+    return "Product $productId, Item $itemId";
+});
+
+Route::get('/categories/{id}', function ($categoryId)
+{
+    return "Category $categoryId";
+})->where('id', '[0-9]');
+
+Route::get('/users/{id?}', function ($userId = "404")
+{
+    return "User $userId";
+});
+
+Route::get("/conflict/as", function ()
+{
+    return "Conflict aszaychik";
+});
+
+Route::get("/conflict/{name}", function (string $name)
+{
+    return "Conflict $name";
+});
+
