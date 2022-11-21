@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -25,4 +26,17 @@ Route::redirect('/github', '/asz');
 
 Route::fallback(function(){
     return '404';
+});
+
+
+
+Route::view('hello', 'hello', ['name' => 'AsZaychik']);
+
+Route::get('/hello-again', function ()
+{
+    return view('hello', ['name' => 'AsZaychik']);
+});
+Route::get('/hello-world', function ()
+{
+    return view('hello.world', ['name' => 'AsZaychik']);
 });
