@@ -95,3 +95,4 @@ Route::post("/input/hello/first", [\App\Http\Controllers\InputController::class,
 Route::post("/input/hello/input", [\App\Http\Controllers\InputController::class, 'helloInput']);
 Route::post("/input/hello/array", [\App\Http\Controllers\InputController::class, 'helloArray']);
 
+Route::post("/input/hello/type", [\App\Http\Controllers\InputController::class, 'inputType']);

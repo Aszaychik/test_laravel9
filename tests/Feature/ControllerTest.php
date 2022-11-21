@@ -43,6 +43,7 @@ class ControllerTest extends TestCase
         ])
             ->assertSeeText("Hello as");
     }
+
     public function testMultiInput(){
         $this->post("/input/hello/input",[
             "name" => [
@@ -54,6 +55,7 @@ class ControllerTest extends TestCase
             ->assertSeeText("as")
             ->assertSeeText("zaychik");
     }
+
     public function testInputArray(){
         $this->post("/input/hello/array",[
             "products" => [
@@ -68,6 +70,16 @@ class ControllerTest extends TestCase
                 ]
         ])->assertSeeText("Infinix Note 12")
             ->assertSeeText("Lenovo Ideapad 3");
+    }
+
+    public function testInputType(){
+        $this->post("/input/type", [
+            "name" => "aszaychik",
+            "married" => "false",
+            "birth_date" => "11-10-2001"
+        ])->assertSeeText("aszaychik")
+            ->assertSeeText("false")
+            ->assertSeeText("11-10-2001");
     }
 
 }
