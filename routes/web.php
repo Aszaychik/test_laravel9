@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CookieController;
 use App\Http\Controllers\FormController;
+use App\Http\Controllers\SessionController;
 use PhpParser\Node\Stmt\Return_;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\VerifyCsrfToken;
@@ -153,3 +154,6 @@ Route::post("/form", [FormController::class, 'submitForm']);
 Route::get("url/current", function(){
     return URL::full();
 });
+
+Route::get("/session/create",[SessionController::class, 'createSession']);
+Route::get("/session/get",[SessionController::class, 'getSession']);
