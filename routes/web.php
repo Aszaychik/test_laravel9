@@ -5,6 +5,7 @@ use App\Http\Controllers\FormController;
 use PhpParser\Node\Stmt\Return_;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\VerifyCsrfToken;
+use Illuminate\Support\Facades\URL;
 
 /*
 |--------------------------------------------------------------------------
@@ -124,6 +125,10 @@ Route::get("/redirect/from", [\App\Http\Controllers\RedirectController::class, "
 Route::get("/redirect/to", [\App\Http\Controllers\RedirectController::class, "redirectTo"]);
 Route::get("/redirect/name", [\App\Http\Controllers\RedirectController::class, "redirectName"]);
 Route::get("/redirect/name/{name}", [\App\Http\Controllers\RedirectController::class, "redirectHello"])->name("redirect-hello");
+Route::get("/redirect/named", function(){
+    return URL::route("redirect-hello", ['name' => 'aszaychik']);
+});
+
 Route::get("/redirect/action", [\App\Http\Controllers\RedirectController::class, "redirectAction"]);
 Route::get("/redirect/away", [\App\Http\Controllers\RedirectController::class, "redirectAway"]);
 
@@ -136,5 +141,15 @@ Route::middleware(['contoh:ASZ, 401'])->prefix("/middleware")->group(function(){
     });
 });
 
+Route::get("/url/action", function(){
+    // return action(FormController::class)
+    return URL::action([FormController::class, "form"]);
+});
+
 Route::get("/form", [FormController::class, 'form'] );
 Route::post("/form", [FormController::class, 'submitForm']);
+
+
+Route::get("url/current", function(){
+    return URL::full();
+});
