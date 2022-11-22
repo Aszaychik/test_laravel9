@@ -7,6 +7,7 @@ use App\Http\Controllers\HelloController;
 use App\Http\Controllers\InputController;
 use App\Http\Controllers\CookieController;
 use App\Http\Controllers\ResponseController;
+use App\Http\Middleware\VerifyCsrfToken;
 
 /*
 |--------------------------------------------------------------------------
@@ -104,7 +105,8 @@ Route::post("/input/type", [\App\Http\Controllers\InputController::class, 'input
 Route::post("/input/filter/only", [\App\Http\Controllers\InputController::class, 'filterOnly']);
 Route::post("/input/filter/except", [\App\Http\Controllers\InputController::class, 'filterExcept']);
 Route::post("/input/filter/merge", [\App\Http\Controllers\InputController::class, 'filterMerge']);
-Route::post("/file/upload", [\App\Http\Controllers\FileController::class, 'upload']);
+Route::post("/file/upload", [\App\Http\Controllers\FileController::class, 'upload'])
+    ->withoutMiddleware([VerifyCsrfToken::class]);
 Route::get("/response/hello", [\App\Http\Controllers\ResponseController::class, 'response']);
 Route::get("/response/header", [\App\Http\Controllers\ResponseController::class, 'header']);
 Route::get("/response/type/view", [\App\Http\Controllers\ResponseController::class, 'responseView']);
@@ -120,3 +122,9 @@ Route::get("/redirect/name", [\App\Http\Controllers\RedirectController::class, "
 Route::get("/redirect/name/{name}", [\App\Http\Controllers\RedirectController::class, "redirectHello"])->name("redirect-hello");
 Route::get("/redirect/action", [\App\Http\Controllers\RedirectController::class, "redirectAction"]);
 Route::get("/redirect/away", [\App\Http\Controllers\RedirectController::class, "redirectAway"]);
+Route::get('/middleware/api', function () {
+    return "OK";
+})->middleware(['contoh:ASZ,401']);
+Route::get('/middleware/group', function () {
+    return "GROUP";
+})->middleware(['asz']);
